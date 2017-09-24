@@ -14,7 +14,9 @@ func main() {
     //    100:"test!",
     //}
 
-    //m :=
+    var m map[int]string = make(map[int]string);
+    //m := make(map[int]string);
+    //var m map[int]string = map[int]string{};
     fmt.Println(m)
 
     fmt.Println("Hello world!");
