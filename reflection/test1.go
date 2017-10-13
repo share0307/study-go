@@ -50,6 +50,10 @@ func Info(o interface{})  {
     for i:=0;i < t.NumField() ;i++  {
         f := t.Field(i)
         //fmt.Println("field:",f)
+        //func (v Value) Interface() (i interface{})
+        //本方法返回v当前持有的值（表示为/保管在interface{}类型），等价于：
+        //var i interface{} = (v's underlying value)
+        //如果v是通过访问非导出结构体字段获取的，会导致panic。
         val := v.Field(i).Interface();
         fmt.Printf("%6s : %v = %v \n", f.Name,f.Type,val);
         //fmt.Println()
