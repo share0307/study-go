@@ -15,7 +15,7 @@ func main()  {
     //类型断言
     var r io.Reader
     var w io.Writer
-    w = r.(io.Writer|nil)
+    w = r.(io.Writer)
     fmt.Println(w);
 
     v := reflect.ValueOf(x)
