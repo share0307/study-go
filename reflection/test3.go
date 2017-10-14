@@ -37,6 +37,7 @@ func main()  {
     //reflect.StructField{Name:"User", PkgPath:"", Type:(*reflect.rtype)(0x10b7220), Tag:"", Offset:0x0, Index:[]int{0}, Anonymous:true}
     //reflect.StructField{Name:"User", PkgPath:"", Type:(*reflect.rtype)(0x10b7200), Tag:"", Offset:0x0, Index:[]int{0}, Anonymous:false}
     fmt.Printf("%#v\n",t.Field(0))
+    fmt.Printf("%#v\n",t.Field(0).PkgPath)
 
     //通过索引取字段
     //[]int{0,0}是一个切片，然后第一位标识的是 “t” 的第一个字段=>a，第二位标识的是 a 的第一个字段,那么也就意味着 a 应该就是一个内嵌的结构体

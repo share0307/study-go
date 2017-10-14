@@ -9,11 +9,17 @@ import (
 func main() {
 
     x := 10
+    x_point := &x
+
+    fmt.Println("x_old_point,",x_point);
     v := reflect.ValueOf(&x)
     //
     //当ValueOf中传入的是指针时，通过 Elem() 方法取得指针的值，ValueOf 传入的是值则无法使用，那就是报错了
     //Elem():如果是指针，则获取其所指向的元素
-    v.Elem().SetInt(321)
+    //v.Elem().SetInt(321)
+    v = v.Elem()
+
+    fmt.Println("v:",&v)
 
 
     //v := reflect.ValueOf(x)
