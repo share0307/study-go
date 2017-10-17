@@ -2,61 +2,26 @@ package main
 
 import (
     "fmt"
-    "time"
+    //"time"
 )
 
 func main()  {
-    //创建一个用于防止超时的频道
-    timeout := make (chan bool, 1)
-    //创建一个 go routine
-    go func() {
-        //睡眠1秒
-        time.Sleep(1 * time.Second) // sleep one second
-        //通过 timeout channel 发送 true
-        timeout <- true
-    }()
 
-    //创建一个 ch 的频道，用于数字传输
-    ch := make (chan int)
+    c := make(chan bool)
+
+    //使用空 select 来阻塞 main 方法的结束
+    //select {
+       //在高版本中的 select{} 已经无效了
+    //}
 
     go func() {
-        for {
-            fmt.Println("Hello World!");
-            select {
-            case v, ok := <-ch:
-                if !ok {
-                    break;
-                }
-                fmt.Println(v, ok)
-                break;
-            case <-timeout:
-                fmt.Println("timeout!")
-                break;
-            }
+        select {
+        case v,ok := <- c:
+            fmt.Println(v,ok)
         }
     }()
 
-    //闭包..超时调用模拟定时调用
-    var fc func();
-    fc = func() {
-        time.AfterFunc(1 * time.Second, func() {
-            timeout <- true
+    close(c)
 
-            fc();
-        });
-    }
-
-    fc();
-
-
-    //close(timeout)
-
-
-    time.Sleep(10 * time.Second);
-
-
-    close(ch)
-    close(timeout)
-
+    fmt.Println();
 }
-

@@ -2,54 +2,48 @@ package main
 
 import (
     "fmt"
+    //"time"
+    "math/rand"
+    "time"
 )
 
 func main()  {
 
     //用于数据传输
     c1,c2 := make(chan int),make(chan string)
-    //用于信号发送
-    o := make(chan bool)
-
 
     go func() {
-        for {
-            //http://blog.csdn.net/zhonglinzhang/article/details/45913443
-            //此处为了验证在 for 循环(无线循环)中，需要至少从 select 中执行一个才能继续下一个循环
-            //每次 for 循环只会执行其中一个 case 或者 default，要是需要监听的队列同时发送数据过来，其实也是等执行完一个再在下一次 select 循环中执行
-            select {
-                case v,ok := <-c1:
-                    fmt.Println("c1");
-                    if !ok{
-                        //当 c1或者 c2任一有一个关闭的，那么给发送关闭信号
-                        o <- true
-                        //其实这个 timeout 在 select 中没什么用
-                        break
-                    }
-                    fmt.Println("c1:",v)
-                case v,ok := <-c2:
-                    fmt.Println("c2");
-                    if !ok{
-                        //当 c1或者 c2任一有一个关闭的，那么给发送关闭信号
-                        o <- true
-                        break
-                    }
-                    fmt.Println("c2:",v)
-            }
+        for{
+            fmt.Println(" 这里是 c2");
+            sb := <- c2
+            fmt.Println(sb)
         }
     }()
 
-    c1 <- 1
-    c2 <- "Hi"
-    c1 <- 3
-    c2 <- "Hello"
+    go func() {
+        for{
+            fmt.Println(" 这里是 c1");
+            sb := <- c1
+            fmt.Println(sb)
+        }
+    }()
 
-    close(c1)
-    close(c2)
+    //使用 select 给 channel 随机发送数据
+    for {
+        time.Sleep(5000000 * time.Microsecond)
+        //fmt.Println("")
+        //当 c1以及 c2都关闭掉，那么在 for 循环里的 select 中会一直收到信号，为的是通知一下该频道被关闭了
+        select {
+            case c1 <- 10:
+            case c2 <- "test!":
+            case c1 <- test():
 
-    oo := <- o
-    fmt.Println(oo)
+        }
+    }
 
     fmt.Println();
 }
 
+func test()  int{
+    return rand.Int();
+}
