@@ -1,18 +1,17 @@
-package main;
+package main
 
 import (
-    "fmt"
-    "strconv"
+	"fmt"
+	"strconv"
 )
 
-func main()  {
-    var a int = 65;
-    b := string(a);
+func main() {
+	var a int = 65
+	b := string(a)
 
-    fmt.Println(b);
+	fmt.Println(b)
 
+	c := strconv.Itoa(a)
 
-    c := strconv.Itoa(a);
-
-    fmt.Println(c);
+	fmt.Println(c)
 }
