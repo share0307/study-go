@@ -1,0 +1,15 @@
+hash: 11fd8645929d188b19d913d49bc4f97de29e09c3d80c04d9a50a0594dd113b7f
+updated: 2017-10-26T00:39:53.407404+08:00
+imports:
+- name: github.com/astaxie/beego
+  version: d96289a81bf67728cff7a19b067aaecc65a62ec6
+  subpackages:
+  - config
+  - context
+  - context/param
+  - grace
+  - logs
+  - session
+  - toolbox
+  - utils
+testImports: []
