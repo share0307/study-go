@@ -7,7 +7,7 @@ import requests;
 
 class MultiClone(object):
     #token
-    __token = "stzSxv1zzaSfipx4CJL4"
+    __token = "sktkkzSxv1zzaSfipx4CJL4"
 
     #计数器
     __num = 0;
