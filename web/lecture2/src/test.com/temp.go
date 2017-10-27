@@ -11,7 +11,7 @@ type HomeController struct {
     beego.Controller
 }
 
-func (this *HomeController) get()  {
+func (this *HomeController) Get()  {
     this.Ctx.WriteString("Hello World!")
     fmt.Println("Hello World!");
 }
