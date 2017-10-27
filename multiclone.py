@@ -7,7 +7,7 @@ import requests;
 
 class MultiClone(object):
     #token
-    __token = "sktkkzSxv1zzaSfipx4CJL4"
+    __token = "stzSxv1zzaSfipx4CJL4"
 
     #计数器
     __num = 0;
@@ -30,7 +30,7 @@ class MultiClone(object):
     #clone 单个项目
     def cloneProject(self,info):
         print(time.strftime("%Y-%m-%d %H:%M:%S"));
-        print("开始 clone 第 ",self.__num,"个项目 : ",info['ssh_url_to_repo'])
+        print("开始 clone 第 ",info['id'],"(",self.__num,")","个项目 : ",info['ssh_url_to_repo'])
         self.__num = self.__num + 1;
         command_str = "git clone %s" % (info['ssh_url_to_repo'])
         os.system(command_str);
@@ -51,7 +51,8 @@ class MultiClone(object):
             print(project_list_api,param);
             req = requests.get(project_list_api,param)
             tmp.extend(json.loads(req.text))
-
+        # print(len(tmp))
+        # exit()
         return tmp
 
     #判断目录是否存在
