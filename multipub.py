@@ -49,9 +49,8 @@ class MultiPub(object):
     def gitPub(self,path):
         #直接拉取一下代码
         first_pull = os.system('git pull');
-        print(first_pull)
         first_checkout = os.system('git checkout .');
-        print(first_checkout)
+
 
         #拉取代码
         out = os.popen('git branch -a');
@@ -86,5 +85,5 @@ if __name__ == '__main__':
 
     time.sleep(1);
 
-    pub = MultiPub("/usr/local/var/www/sscf")
+    pub = MultiPub("/usr/local/var/www/php/sscf")
     pub.gitMultiPub();
