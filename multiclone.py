@@ -67,7 +67,7 @@ class MultiClone(object):
 
 
 if __name__=='__main__':
-    path = "/usr/local/var/www/php/sscf";
+    path = "/usr/local/var/www/sscf";
     multoclone = MultiClone(path)
 
     multoclone.cloneProjects()
