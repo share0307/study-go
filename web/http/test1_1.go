@@ -1,16 +1,24 @@
 package main
 
 import (
-	"net/http"
-	"io"
-	"log"
+    "net/http"
+    "io"
+    "log"
 )
 
+func main()  {
+    http.HandleFunc("/hi",SayHi);
+    http.HandleFunc("/world",SayWorld);
 
-func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		io.WriteString(w, "Hello world!");
-	});
-	log.Fatal(http.ListenAndServe(":8080", nil))
+    log.Fatalln(http.ListenAndServe(":8080",nil))
+}
 
+func SayHi(w http.ResponseWriter,r *http.Request)  {
+    io.WriteString(w,r.URL.String())
+    io.WriteString(w,"Hi!");
+    http.NotFound(w,r)
+}
+
+func SayWorld(w http.ResponseWriter,r *http.Request)  {
+    log.Println("url not found:",r.RequestURI);
 }
