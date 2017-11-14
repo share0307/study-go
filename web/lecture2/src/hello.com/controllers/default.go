@@ -16,6 +16,8 @@ func (c *MainController) Get() {
 	c.Data["Slice"] = []int{1,2,3,4,5,6,7,8,9,10}
 	c.Data["Pipe"] = "<div>Hello World!</div>"
 
+	beego.Error("到这里了吗？！")
+
 	//beego 使用 c.TplName 指定使用的模板
 	c.TplName = "index.tpl"
 }
