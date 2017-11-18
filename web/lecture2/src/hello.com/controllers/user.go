@@ -39,6 +39,16 @@ func (this *UserController)Login()  {
     return
 }
 
+func (this *UserController)Logout()  {
+    if this.Input().Get("exit") == "true"{
+        this.Ctx.SetCookie("username","",-1,"/")
+        this.Ctx.SetCookie("password","",-1,"/")
+    }
+
+    this.Redirect("/blog",302)
+    return
+}
+
 func checkAccount(ctx *context.Context) bool{
     ck,err := ctx.Request.Cookie("username")
 
