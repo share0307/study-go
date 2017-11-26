@@ -98,6 +98,7 @@ func AllCategoryList() (*[]Category,error) {
 
 /*
 删除分类操作
+@author jianwei
  */
 func DelCategory(id string) error {
 

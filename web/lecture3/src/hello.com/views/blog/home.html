@@ -2,13 +2,15 @@
 <body>
     {{ template "layout/navbar.html" . }}
     <div class="container">
-        <div class="page-header">
-            <h1>我得第一篇博客</h1>
-            <h6 class="text-muted">文章发表于 2017年 x 月 x 日 xx:xx 共有 x 次浏览 x 次评论</h6>
+        {{ range .Topics}}
+        <a href="/topic/view/{{ .Id }}.html" class="page-header">
+            <h1>{{ .Title }}</h1>
+            <h6 class="text-muted">文章发表于 {{ .Created }} 共有 {{ .Views }} 次浏览 {{ .ReplyConut }} 次评论</h6>
             <p>
-                这是我的第一篇文章。
+                {{ .Content }}
             </p>
-        </div>
+        </a>
+        {{ end }}
     </div>
 
 

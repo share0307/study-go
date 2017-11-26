@@ -1,0 +1,12 @@
+{{ template "layout/header.html" .}}
+<body>
+    {{ template "layout/navbar.html" . }}
+    <div class="container">
+        <h1>{{ .Topic.Title }} <a href="/topic/modify?tid={{ .Topic.Id }}" class="btn btn-default btn-sm pull-right">修改</a> </h1>
+        {{ .Topic.Content }}
+    </div>
+
+    <script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.js"></script>
+</body>
+</html>
