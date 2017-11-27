@@ -1,0 +1,20 @@
+{{ template "layout/header.html" .}}
+<body>
+    {{ template "layout/navbar.html" . }}
+    <div class="container">
+        {{ range .Topics}}
+        <a href="/topic/view/{{ .Id }}.html" class="page-header">
+            <h1>{{ .Title }}</h1>
+            <h6 class="text-muted">文章发表于 {{ .Created }} 共有 {{ .Views }} 次浏览 {{ .ReplyConut }} 次评论</h6>
+            <p>
+                {{ .Content }}
+            </p>
+        </a>
+        {{ end }}
+    </div>
+
+
+    <script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.js"></script>
+</body>
+</html>
