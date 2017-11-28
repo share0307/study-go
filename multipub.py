@@ -85,5 +85,6 @@ if __name__ == '__main__':
 
     time.sleep(1);
 
-    pub = MultiPub("/usr/local/var/www/sscf")
+    #pub = MultiPub("/usr/local/var/www/sscf")
+    pub = MultiPub("/Users/kkk/Desktop/www/php/sscf/")
     pub.gitMultiPub();

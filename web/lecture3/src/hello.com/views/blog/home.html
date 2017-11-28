@@ -2,6 +2,7 @@
 <body>
     {{ template "layout/navbar.html" . }}
     <div class="container">
+        <div class="col-md-9" >
         {{ range .Topics}}
         <a href="/topic/view/{{ .Id }}.html" class="page-header">
             <h1>{{ .Title }}</h1>
@@ -11,6 +12,16 @@
             </p>
         </a>
         {{ end }}
+        </div>
+        <div class="col-md-3">
+            <h3>文章分类</h3>
+            <ul>
+                <li><a href="/blog">全部</a> </li>
+                {{ range .Categories }}
+                <li><a href="/blog?cid={{.Id}}">{{ .Title }}</a> </li>
+                {{ end }}
+            </ul>
+        </div>
     </div>
 
 

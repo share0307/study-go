@@ -4,6 +4,7 @@ import (
 	"github.com/astaxie/beego"
     "hello.com/models"
     "regexp"
+	"strconv"
 )
 
 type TopicController struct {
@@ -38,6 +39,10 @@ func (this *TopicController)Add()  {
     if err == nil{
         this.Data["Username"] = ck.Value
     }
+
+    //获取分类列表
+    this.Data["CategoryList"],_ = models.AllCategoryList()
+
     this.TplPrefix = "topic/"
     this.TplName = "add.html"
     return
@@ -56,12 +61,14 @@ func (this *TopicController)Post()  {
     tid := this.Input().Get("tid")
     title := this.Input().Get("title")
     content := this.Input().Get("content")
+    category_id,_ := strconv.ParseInt(this.Input().Get("category_id"),10,64)
+
 
     var err error
     if len(tid) >0{
-        err = models.UpdateTopic(tid,title, content)
+        err = models.UpdateTopic(tid,category_id,title, content)
     }else {
-        err = models.AddTopic(title, content)
+        err = models.AddTopic(category_id, title, content)
     }
 
     beego.Informational(err)
@@ -99,8 +106,8 @@ func (this *TopicController)View()  {
     }
 
 
-    beego.Debug("tmp----------:",tmp)
-    beego.Debug("topicid----------:",topicid)
+    //beego.Debug("tmp----------:",tmp)
+    //beego.Debug("topicid----------:",topicid)
 
     //beego.Error("topicid:",topicid)
 
@@ -113,6 +120,9 @@ func (this *TopicController)View()  {
     }
 
     this.Data["Topic"] = topic
+
+	this.Data["Replies"],_ = models.AllComments()
+	this.Data["IsLogin"] = checkAccount(this.Ctx)
 
     this.TplPrefix = "topic/"
     this.TplName = "view.html"
@@ -128,6 +138,9 @@ func (this *TopicController)Modify()  {
     if err != nil{
         this.Redirect(this.Ctx.Request.Referer(),302)
     }
+
+	//获取分类列表
+	this.Data["CategoryList"],_ = models.AllCategoryList()
 
     this.TplName = "topic/modify.html"
     this.Data["Topic"] = topic

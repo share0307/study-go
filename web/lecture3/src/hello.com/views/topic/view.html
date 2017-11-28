@@ -6,6 +6,31 @@
         {{ .Topic.Content }}
     </div>
 
+    <div class="container">
+        {{ $IsLogin := .IsLogin }}
+        {{ range .Replies }}
+            <h3>{{.Name}}   <small>{{ .Created }}</small>
+            {{ if eq true $IsLogin }}
+                <a href="/reply/delete?rid={{ .Id }}" class="pull-right btn btn-default btn-sm">删除</a>
+            {{ end }}
+            </h3>
+            <p>{{ .Content }}</p>
+        {{ end }}
+        <h3>文本回复</h3>
+        <form method="post" action="/reply/add">
+            <input type="hidden" name="tid" value="{{ .Topic.Id  }}" />
+            <div class="form-group">
+                <label>显示昵称：</label>
+                <input type="text" name="nickname" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>内容：</label>
+                <textarea class="form-control" name="content" rows="10" cols="30"></textarea>
+            </div>
+            <button class="btn btn-default">提交评论</button>
+        </form>
+    </div>
+
     <script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.2.4/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/bootstrap.js"></script>
 </body>

@@ -28,6 +28,7 @@ type Category struct {
 type Topic struct {
     Id int64
     Uid int64
+    CategoryId int64 `orm:index`
     Title string
     Content string `orm:"size(5000)"`
     Attachment string
@@ -38,6 +39,14 @@ type Topic struct {
     ReplyTime time.Time `orm:"index"`
     ReplyConut int64
     ReplyLastUserId int64
+}
+
+type Comment struct {
+	Id int64
+	Tid int64
+	Name string
+	Content string `orm:"size(1000)"`
+	Created time.Time `orm:"index"`
 }
 
 /**
@@ -55,7 +64,7 @@ func RegisterDB()  {
     }
 
     // 需要在init中注册定义的model
-    orm.RegisterModel(new(Category),new(Topic))
+    orm.RegisterModel(new(Category),new(Topic),new(Comment))
 
     // 参数1   driverName
     // 参数2   数据库类型

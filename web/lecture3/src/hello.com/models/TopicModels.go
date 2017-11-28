@@ -13,7 +13,7 @@ import (
 /*
 添加分类操作
  */
-func AddTopic(title,content string) error {
+func AddTopic(category_id int64,title,content string) error {
     if len(title) < 1 || len(content) < 1{
         return errors.New("请输入标题或者文章！")
     }
@@ -21,6 +21,7 @@ func AddTopic(title,content string) error {
     orm := orm.NewOrm()
 
     topic := &Topic{
+        CategoryId:category_id,
         Title:title,
         Content:content,
         Created:time.Now(),
@@ -40,7 +41,7 @@ func AddTopic(title,content string) error {
 /*
 修改分类操作
  */
-func UpdateTopic(tid interface{},title,content string) error {
+func UpdateTopic(tid interface{},category_id int64,title,content string) error {
     if len(title) < 1 || len(content) < 1{
         return errors.New("请输入标题或者文章！")
     }
@@ -58,6 +59,7 @@ func UpdateTopic(tid interface{},title,content string) error {
 
     topic := &Topic{
         Id:topicId,
+        CategoryId:category_id,
         Title:title,
         Content:content,
         //Created:time.Now(),
@@ -65,7 +67,7 @@ func UpdateTopic(tid interface{},title,content string) error {
         //ReplyTime:time.Now(),
     }
 
-    _,err := orm.Update(topic,"Id","Title","Content","Updated")
+    _,err := orm.Update(topic,"Id","Title","CategoryId","Content","Updated")
 
     if err != nil{
         return err
@@ -88,10 +90,15 @@ func TopicList(title string,condition map[string]string) ([]Topic,error) {
         qs = qs.Filter("title__icontains", title)
     }
 
-    var ok bool
-    if _,ok = condition["sort"];ok == true{
-        beego.Error("here!")
-        beego.Error(condition["sort"])
+	if _,ok := condition["cid"]; ok == true{
+		if category_id,err := strconv.ParseInt(condition["cid"],10,64); err == nil && category_id > 0 {
+			qs = qs.Filter("category_id", category_id)
+		}
+	}
+
+    if _,ok := condition["sort"];ok == true{
+        //beego.Error("here!")
+        //beego.Error(condition["sort"])
         qs = qs.OrderBy(condition["sort"])
     }
 

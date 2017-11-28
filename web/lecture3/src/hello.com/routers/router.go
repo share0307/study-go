@@ -21,6 +21,8 @@ func init() {
     //beego.Router("/topic/view",&controllers.TopicController{},"*:View")
     //自动化路由
     beego.AutoRouter(&controllers.TopicController{})
+    //自动化路由(评论)
+    beego.AutoRouter(&controllers.ReplyController{})
 
     //自动匹配
     beego.AutoRouter(&controllers.UserController{})
