@@ -5,6 +5,7 @@ import (
 	"log"
 )
 
+
 type SingleHost struct {
 	//1.类型为接口，为的是让此结构可通过 handler 此字段去使用该接口类的方法
 	//2.灵活，可以把通用实现了此结构的结构体
