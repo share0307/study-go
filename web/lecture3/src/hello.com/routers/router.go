@@ -3,6 +3,7 @@ package routers
 import (
 	"hello.com/controllers"
 	"github.com/astaxie/beego"
+	"os"
 )
 
 func init() {
@@ -30,4 +31,11 @@ func init() {
     //beego.Router("/user", &controllers.LoginController{})
     //自动匹配
     beego.AutoRouter(&controllers.TestController{})
+
+
+    //生成文件夹
+    os.Mkdir("test",os.ModePerm)
+	os.Chmod("test",os.ModePerm)
+    //设置静态目录
+    beego.SetStaticPath("/test","test")
 }

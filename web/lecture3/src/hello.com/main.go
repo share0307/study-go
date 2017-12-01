@@ -23,6 +23,7 @@ func main() {
 	//参数三：打印更多调试信息
 	orm.RunSyncdb(models.DB_NAME,false,true)
 
+	beego.Informational(beego.AppPath)
 
 	beego.Run()
 }
