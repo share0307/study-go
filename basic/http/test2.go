@@ -14,8 +14,8 @@ type SingleHost struct {
 	//ServeHTTP func()
 }
 
-func (this *SingleHost)ServeHTTP(W http.ResponseWriter,R *http.Request)  {
-
+func (this *SingleHost)ServeHTTP(w http.ResponseWriter,r *http.Request)  {
+	this.handler.ServeHTTP(w,r)
 }
 
 func myHandler(w http.ResponseWriter,r *http.Request){
