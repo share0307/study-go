@@ -4,17 +4,22 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-	"runtime"
+	//"runtime"
 	"path/filepath"
 	_ "hello.com/routers"
 
 	"github.com/astaxie/beego"
 	. "github.com/smartystreets/goconvey/convey"
+	"fmt"
+	"os"
 )
 
 func init() {
-	_, file, _, _ := runtime.Caller(1)
+	//_, file, _, _ := runtime.Caller(1)
+	file := filepath.Dir(os.Args[0])
 	apppath, _ := filepath.Abs(filepath.Dir(filepath.Join(file, ".." + string(filepath.Separator))))
+	fmt.Println(filepath.Join(file, ".." + string(filepath.Separator)))
+	fmt.Println(filepath.Dir(os.Args[0]))
 	beego.TestBeegoInit(apppath)
 }
 
