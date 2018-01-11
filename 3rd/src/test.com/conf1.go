@@ -35,6 +35,21 @@ func main()  {
 
 	log.Printf("设置键值 %s 为插入操作：%v","key_default",isInsert)
 
+	//注释
+	//comment := cfg.GetSectionComments("super")
+
+	log.Fatalf("无法设置键值(%s)：%s","key_default",err)
+
+
+
+
+
+
+
+
+
+
+
 	fmt.Println()
 
 }
